@@ -1,0 +1,11 @@
+#!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (C) 2021-present Fewtarius (https://github.com/fewtarius)
+
+#If PortMaster does not exist copy PortMaster folder to roms/ports
+if [ ! -e "/storage/roms/ports/PortMaster" ]
+then
+  cp -r /usr/config/ports/PortMaster /storage/roms/ports
+  chmod +x /storage/roms/ports/PortMaster -R
+  mv /storage/roms/ports/PortMaster/PortMaster.sh /storage/roms/ports/PortMaster.sh
+fi
