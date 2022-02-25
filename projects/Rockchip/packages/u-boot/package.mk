@@ -9,7 +9,7 @@ PKG_SITE="https://github.com/rockchip-linux/u-boot"
 PKG_DEPENDS_TARGET="toolchain swig:host rkbin"
 PKG_LONGDESC="Rockchip U-Boot is a bootloader for embedded systems."
 PKG_URL="https://github.com/JustEnoughLinuxOS/rockchip-uboot.git"
-PKG_VERSION="543c8d3"
+PKG_VERSION="23f4a5d"
 GET_HANDLER_SUPPORT="git"
 PKG_GIT_CLONE_DEPTH="1"
 
