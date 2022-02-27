@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# Copyright (C) 2020-present Shanti Gilbert (https://github.com/shantigilbert)
-# Maintenance 2021-present 351ELEC (https://github.com/351ELEC)
+# Copyright (C) 2021-present Fewtarius (https://github.com/fewtarius)
+# Maintenance 2022-present BrooksyTech (https://github.com/brooksytech)
 
 PKG_NAME="portmaster"
 PKG_VERSION="1.0"
@@ -16,6 +16,6 @@ pre_unpack() {
 }
 
 makeinstall_target() {
-  mkdir -p $INSTALL/usr/config/ports/
-  cp -r $PKG_BUILD/PortMaster $INSTALL/usr/config/ports/
+  mkdir -p $INSTALL//usr/share/
+  cp -r $PKG_BUILD/PortMaster $INSTALL/usr/share/
 }
