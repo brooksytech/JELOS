@@ -1,11 +1,12 @@
 #!/bin/sh
 # SPDX-License-Identifier: Apache-2.0
 # Copyright (C) 2021-present Fewtarius (https://github.com/fewtarius)
+# Maintenance 2022-present BrooksyTech (https://github.com/brooksytech)
 
 #If PortMaster does not exist copy PortMaster folder to roms/ports
 if [ ! -e "/storage/roms/ports/PortMaster" ]
 then
-	cp -r /usr/config/ports/PortMaster /storage/roms/ports
+	cp -r /usr/share/PortMaster /storage/roms/ports
 	chmod +x /storage/roms/ports/PortMaster -R
 	mv /storage/roms/ports/PortMaster/PortMaster.sh /storage/roms/ports/PortMaster.sh
 fi
@@ -17,25 +18,23 @@ touch /storage/roms/ports/gamelist.xml
  cat > /storage/roms/ports/gamelist.xml <<EOF
 <?xml version="1.0"?>
 <gameList>
-
-        <game>
-                <path>/storage/roms/ports/PortMaster.sh</path>
-                <name>PortMaster</name>
-                <hidden>true</hidden>
-        </game>
-
+	<game>
+		<path>/storage/roms/ports/PortMaster.sh</path>
+		<name>PortMaster</name>
+		<hidden>true</hidden>
+	</game>
 </gameList>
 EOF
 
-#If gamelist.xml exists and no portmaster entry exists then add portmaster entry to set to hidden.
+#If gamelist.xml exists and no portmaster entry exists then add portmaster entry & set to hidden.
 else
 if ! grep -R "PortMaster" "/storage/roms/ports/gamelist.xml"
 then
 sed -i 's|<gameList>|&   \
-    <game>\
-        <path>/storage/roms/ports/PortMaster.sh</path>\
-        <name>PortMaster</name>\
-        <hidden>true</hidden>\
-    </game>|' /storage/roms/ports/gamelist.xml
+	<game>\
+		<path>/storage/roms/ports/PortMaster.sh</path>\
+		<name>PortMaster</name>\
+		<hidden>true</hidden>\
+	</game>|' /storage/roms/ports/gamelist.xml
 	fi
 fi
