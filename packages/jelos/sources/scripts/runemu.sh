@@ -53,9 +53,6 @@ GAMEFOLDER="${ROMNAME//${BASEROMNAME}}"
 if [[ $EMULATOR = "retroarch" ]]; then
 	EMU="${CORE}_libretro"
 	RETROARCH="yes"
-elif [[ $EMULATOR = "retrorun" ]]; then
-	EMU="${CORE}_libretro"
-	RETRORUN="yes"
 elif [[ $EMULATOR = "mupen64plussa" ]]; then
 	EMU="M64P"
 else
@@ -205,7 +202,7 @@ bluetooth disable
 jslisten stop
 
 ### Per emulator/core configurations
-if [ -z ${RETROARCH} ] &&  [ -z ${RETRORUN} ]
+if [ -z ${RETROARCH} ]
 then
 	$VERBOSE && log "Configuring for a non-libretro emulator"
 	case ${PLATFORM} in
@@ -305,14 +302,6 @@ then
 			jslisten set "${CORE}"
 			RUNTHIS='${TBASH} "start_${CORE}.sh" "${ROMNAME}"'
 		esac
-elif [ -n "${RETRORUN}" ]
-then
-	jslisten set "retrorun retrorun32"
-	$VERBOSE && log "Configuring retrorun emulator started"
-	$VERBOSE && log "platform: ${PLATFORM}"
-	$VERBOSE && log "core: ${EMU}"
-	RUNTHIS='${TBASH} /usr/bin/retrorun.sh /tmp/cores/${EMU}.so "${ROMNAME}" ${PLATFORM}'
-
 else
 	$VERBOSE && log "Configuring for a libretro core"
 
