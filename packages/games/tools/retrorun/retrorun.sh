@@ -14,7 +14,7 @@ CONF="/storage/.config/system/configs/systems.cfg"
 RRCONF="/storage/.config/game/configs/retrorun/retrorun.cfg"
 
 if [ ! -f ${RRCONF} ]; then
-  cp -f /usr/config/distribution/configs/retrorun.cfg /storage/.config/game/configs/retrorun/retrorun.cfg
+  cp -f /usr/config/game/configs/retrorun/retrorun.cfg /storage/.config/game/configs/retrorun/retrorun.cfg
 fi
 
 function get_setting() {
