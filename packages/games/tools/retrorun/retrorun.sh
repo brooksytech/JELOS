@@ -10,7 +10,7 @@ echo 'starting retrorun emulator...'
 CORE="$1"
 ROM="${2##*/}"
 PLATFORM="$3"
-CONF="/storage/.config/system/configs/systems.cfg"
+CONF="/storage/.config/system/configs/system.cfg"
 RRCONF="/storage/.config/game/configs/retrorun/retrorun.cfg"
 
 if [ ! -f ${RRCONF} ]; then
