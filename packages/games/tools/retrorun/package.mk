@@ -34,7 +34,7 @@ makeinstall_target() {
     cp retrorun $INSTALL/usr/bin
     cp $PKG_DIR/retrorun.sh $INSTALL/usr/bin
     cp -vP $PKG_BUILD/../../build.${DISTRO}-${DEVICE}.arm/retrorun-*/.install_pkg/usr/bin/retrorun32 $INSTALL/usr/bin
-    mkdir -p $INSTALL/usr/config/distribution/configs
-    cp -vP $PKG_DIR/retrorun.cfg $INSTALL/usr/config/distribution/configs
+    mkdir -p $INSTALL/usr/config/game/configs/retrorun
+    cp -vP $PKG_DIR/retrorun.cfg $INSTALL/usr/config/game/configs/retrorun
   fi
 }
