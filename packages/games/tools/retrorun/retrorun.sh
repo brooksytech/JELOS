@@ -10,11 +10,11 @@ echo 'starting retrorun emulator...'
 CORE="$1"
 ROM="${2##*/}"
 PLATFORM="$3"
-CONF="/storage/.config/distribution/configs/distribution.conf"
-RRCONF="/storage/.config/distribution/configs/retrorun.cfg"
+CONF="/storage/.config/system/configs/systems.cfg"
+RRCONF="/storage/.config/game/configs/retrorun/retrorun.cfg"
 
 if [ ! -f ${RRCONF} ]; then
-  cp -f /usr/config/distribution/configs/retrorun.cfg /storage/.config/distribution/configs/
+  cp -f /usr/config/distribution/configs/retrorun.cfg /storage/.config/game/configs/retrorun/retrorun.cfg
 fi
 
 function get_setting() {
