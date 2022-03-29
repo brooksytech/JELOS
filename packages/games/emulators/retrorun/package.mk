@@ -36,6 +36,7 @@ makeinstall_target() {
     cp -vP $PKG_BUILD/../../build.${DISTRO}-${DEVICE}.arm/retrorun-*/.install_pkg/usr/bin/retrorun32 $INSTALL/usr/bin
     mkdir -p $INSTALL/usr/config/game/configs/retrorun
     cp -vP $PKG_DIR/retrorun.cfg $INSTALL/usr/config/game/configs/retrorun
+    cp -vP $PKG_DIR/retrorun.sh $INSTALL/usr/config/game/configs/retrorun/
     chmod +x $INSTALL/usr/bin/retrorun*
   fi
 }
