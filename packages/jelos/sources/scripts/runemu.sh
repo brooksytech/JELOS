@@ -311,7 +311,7 @@ then
 	$VERBOSE && log "Configuring retrorun emulator started"
 	$VERBOSE && log "platform: ${PLATFORM}"
 	$VERBOSE && log "core: ${EMU}"
-	RUNTHIS='${TBASH} /usr/bin/retrorun.sh /tmp/cores/${EMU}.so "${ROMNAME}" ${PLATFORM}'
+	RUNTHIS='${TBASH} /usr/config/game/configs/retrorun/retrorun.sh /tmp/cores/${EMU}.so "${ROMNAME}" ${PLATFORM}'
 
 else
 	$VERBOSE && log "Configuring for a libretro core"
