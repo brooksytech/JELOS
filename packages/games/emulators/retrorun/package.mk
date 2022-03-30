@@ -2,7 +2,7 @@
 # Copyright (C) 2021-present 351ELEC (https://github.com/351ELEC)
 
 PKG_NAME="retrorun"
-PKG_VERSION="05cda2d620954a4505c4528864d72e1712439a8f"
+PKG_VERSION="00a47d5d72ee823262a6d4fe6fe3b7244dc7ee9d"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/brooksytech/retrorun-jelos"
