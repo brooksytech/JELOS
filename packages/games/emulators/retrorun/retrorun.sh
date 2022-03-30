@@ -36,7 +36,7 @@ function get_setting() {
 }
 
 # Auto Save
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "auto_save"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -49,7 +49,7 @@ fi
 
 
 # Map left analog to DPAD
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "map_left_analog_to_dpad"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -62,7 +62,7 @@ fi
 
 
 # Game Aspect Ratio
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "game_aspect_ratio"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -74,7 +74,7 @@ else
 fi
 
 # Show FPS
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "show_fps"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "disabled" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -86,7 +86,7 @@ else
 fi
 
 # Internal Resolution
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "internal_resolution"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -114,7 +114,7 @@ else
 fi
 
 # Synchronous Rendering
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "synchronous_rendering"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -130,7 +130,7 @@ else
 fi
 
 # PSX CPU Clock
-# Get configuration from distribution.conf and set to retrorun.cfg
+# Get configuration from system.cfg and set to retrorun.cfg
 get_setting "psx_cpu_clock"
 echo ${EES}
 if [ "${EES}" == "auto" ] || [ "${EES}" == "false" ] || [ "${EES}" == "none" ] || [ "${EES}" == "0" ]; then
@@ -145,24 +145,15 @@ else
 	fi
 fi
 
-rm /dev/input/by-path/platform-retrogame-joypad-event-joystick || true
+rm /dev/input/by-path/platform-singleadc-joypad-event-joystick || true
 echo 'creating fake joypad'
 /usr/bin/rg351p-js2xbox --silent -t oga_joypad &
 sleep 0.2
 echo 'confguring inputs'
-EE_DEVICE=$(cat /storage/.config/.OS_ARCH)
-echo 'confguring inputs on device:'$EE_DEVICE
-if [[ "$EE_DEVICE" == "RG351V" ]] || [[ "$EE_DEVICE" == "RG351MP" ]];
-then
-    ln -s /dev/input/event4 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-elif
-    [[ "$EE_DEVICE" == "JELOS" ]]; then
-          echo "JELOS"
-          ln -s /dev/input/by-path/platform-odroidgo2-joypad-event-joystick /dev/input/by-path/platform-singleadc-joypad-event-joystick
-else
-    ln -s /dev/input/event3 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
-fi
-chmod 777 /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+
+ln -s /dev/input/event3 /dev/input/by-path/platform-singleadc-joypad-event-joystick
+
+chmod 777 /dev/input/by-path/platform-singleadc-joypad-event-joystick
 echo 'using core:' "$1"
 echo 'platform:' "$3"
 echo 'starting game:' "$2"
@@ -189,8 +180,17 @@ then
 else
 	echo 'using 64bit'
 	/usr/bin/retrorun --triggers $FPS $GPIO_JOYPAD -s /storage/roms/"$3" -d /roms/bios "$1" "$2"
+	#echo "/usr/bin/retrorun --triggers" $FPS $GPIO_JOYPAD "-s /storage/roms/"$3" -d /roms/bios "$1" "$2
 fi
+
+echo 'VARIABLES'
+echo "1: "$1
+echo "2: "$2
+echo "3: "$3
+echo "FPS: "$FPS
+echo "GPIO_JOYPAD: "$GPIO_JOYPAD
+echo "Exec script: /usr/bin/retrorun --triggers" $FPS $GPIO_JOYPAD "-s /storage/roms/"$3" -d /roms/bios "$1" "$2
 sleep 0.5
-rm /dev/input/by-path/platform-odroidgo2-joypad-event-joystick
+#rm /dev/input/by-path/platform-singleadc-joypad-event-joystick
 kill $(pidof rg351p-js2xbox)
 echo 'end!'
