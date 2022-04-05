@@ -20,5 +20,5 @@ pre_configure_target() {
 
 makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libretro
-  cp flycast_libretro.so $INSTALL/usr/lib/libretro/flycast_flyinghead_libretro.so
+  cp flycast_libretro.so $INSTALL/usr/lib/libretro/flycast_libretro.so
 }
