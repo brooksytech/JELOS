@@ -14,3 +14,28 @@ index 62467d08..cb167b4f 100644
  		if (rv < 0)
  		{
 			db = get_readonly_config_path("gamecontrollerdb.txt");
+--- a/core/archive/ZipArchive.cpp
++++ b/core/archive/ZipArchive.cpp
+@@ -27,20 +27,8 @@ ZipArchive::~ZipArchive()
+
+ bool ZipArchive::Open(const char* path)
+ {
+-       FILE *file = nowide::fopen(path, "rb");
+-       if (file == nullptr)
+-               return false;
+-       zip_error_t error;
+-       zip_source_t *source = zip_source_filep_create(file, 0, -1, &error);
+-       if (source == nullptr)
+-       {
+-               std::fclose(file);
+-               return false;
+-       }
+-       zip = zip_open_from_source(source, 0, NULL);
+-       if (zip == nullptr)
+-               zip_source_free(source);
+-       return zip != nullptr;
++       zip = zip_open(path, 0, NULL);
++       return (zip != NULL);
+ }
+
+ ArchiveFile* ZipArchive::OpenFile(const char* name)
