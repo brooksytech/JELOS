@@ -16,7 +16,7 @@ index 62467d08..cb167b4f 100644
 			db = get_readonly_config_path("gamecontrollerdb.txt");
 --- a/core/archive/ZipArchive.cpp
 +++ b/core/archive/ZipArchive.cpp
-@@ -27,20 +27,8 @@ bool ZipArchive::Open(const char* path)
+@@ -27,20 +27,8 @@ ZipArchive::~ZipArchive()
 
  bool ZipArchive::Open(const char* path)
  {
