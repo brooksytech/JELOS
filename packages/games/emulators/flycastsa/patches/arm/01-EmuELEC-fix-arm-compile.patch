@@ -12,16 +12,3 @@
  	size_t size=(u8*)pEnd-(u8*)start+4;
 --- a/core/hw/arm7/arm7_rec_arm32.cpp
 +++ b/core/hw/arm7/arm7_rec_arm32.cpp
-@@ -59,9 +59,9 @@
- 	r5, r6, r7, r9, r10, r11
- };
- 
--class Arm32ArmRegAlloc : public ArmRegAlloc<alloc_regs.size(), Arm32ArmRegAlloc>
--{
--	using super = ArmRegAlloc<alloc_regs.size(), Arm32ArmRegAlloc>;
-+class Arm32ArmRegAlloc : public ArmRegAlloc<6, Arm32ArmRegAlloc>
-+{
-+	using super = ArmRegAlloc<6, Arm32ArmRegAlloc>;
- 
- 	void LoadReg(int host_reg, Arm7Reg armreg, ArmOp::Condition cc = ArmOp::AL)
- 	{
