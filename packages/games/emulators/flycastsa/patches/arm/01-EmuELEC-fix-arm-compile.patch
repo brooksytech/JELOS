@@ -10,5 +10,3 @@
  #else // defined(__ANDROID__)
  	void* start=code;
  	size_t size=(u8*)pEnd-(u8*)start+4;
---- a/core/hw/arm7/arm7_rec_arm32.cpp
-+++ b/core/hw/arm7/arm7_rec_arm32.cpp
