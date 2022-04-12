@@ -1,3 +1,5 @@
+diff --git a/core/archive/ZipArchive.cpp b/core/archive/ZipArchive.cpp
+index 394f919a..c5328e8c 100644
 --- a/core/archive/ZipArchive.cpp
 +++ b/core/archive/ZipArchive.cpp
 @@ -27,20 +27,8 @@ ZipArchive::~ZipArchive()
