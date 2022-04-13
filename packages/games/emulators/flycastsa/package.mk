@@ -25,6 +25,6 @@ makeinstall_target() {
   cp $PKG_BUILD/.${TARGET_NAME}/flycast $INSTALL/usr/bin/flycast
   cp $PKG_DIR/scripts/* $INSTALL/usr/bin
 
-	chmod +x $INSTALL/usr/bin/flycast.sh
+	chmod +x $INSTALL/usr/bin/start_flycastsa.sh
 	chmod +x $INSTALL/usr/bin/set_flycast_joy.sh
 }
