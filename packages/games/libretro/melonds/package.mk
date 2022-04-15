@@ -16,7 +16,7 @@ PKG_TOOLCHAIN="make"
 PKG_BUILD_FLAGS="-lto"
 PKG_PATCH_DIRS+="${DEVICE}"
 
-pre_configure_target() {
+pre_make_target() {
   if [[ "${DEVICE}" =~ RG351 ]]
   then
     PKG_MAKE_OPTS_TARGET=" platform=odroidgoa"
