@@ -6,19 +6,15 @@ PKG_VERSION="e93ec3e462d3dfc1556781510a3cee113f02abb2"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"
-PKG_SITE="https://git.libretro.com/libretro/melonDS"
-PKG_URL="$PKG_SITE.git"
+PKG_SITE="https://github.com/brooksytech/melonds-libretro"
+PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain $OPENGLES"
 PKG_PRIORITY="optional"
 PKG_SECTION="libretro"
 PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 
-cd ..
-
 pre_make_target() {
-
-  export BUILD_SYSROOT=${SYSROOT_PREFIX}
   
   if [[ "${DEVICE}" =~ RG351 ]]
   then
