@@ -12,6 +12,7 @@ PKG_DEPENDS_TARGET="toolchain $OPENGLES"
 PKG_PRIORITY="optional"
 PKG_SECTION="libretro"
 PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
+PKG_TOOLCHAIN="make"
 
 pre_make_target() {
   if [[ "${DEVICE}" =~ RG351 ]]
@@ -23,6 +24,9 @@ pre_make_target() {
   fi
 }
 
+make_target() {
+  make
+}
 makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libretro
   cp melonds_libretro.so $INSTALL/usr/lib/libretro/
