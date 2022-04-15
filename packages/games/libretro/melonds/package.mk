@@ -15,6 +15,9 @@ PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 
 pre_make_target() {
+
+  export BUILD_SYSROOT=${SYSROOT_PREFIX}
+  
   if [[ "${DEVICE}" =~ RG351 ]]
   then
     PKG_MAKE_OPTS_TARGET=" platform=odroidgoa"
@@ -22,10 +25,6 @@ pre_make_target() {
   then
     PKG_MAKE_OPTS_TARGET=" platform=RK3399"
   fi
-}
-
-make_target() {
-  make
 }
 
 makeinstall_target() {
