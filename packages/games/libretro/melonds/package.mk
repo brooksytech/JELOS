@@ -1,3 +1,8 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2022-present BrooksyTech (https://github.com/brooksytech)
+
+PKG_NAME="melonds"
+PKG_VERSION="6abea20344d5fcd9e953b9bb994625122262f111"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"
