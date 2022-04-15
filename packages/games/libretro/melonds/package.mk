@@ -14,6 +14,8 @@ PKG_SECTION="libretro"
 PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 
+cd ..
+
 pre_make_target() {
 
   export BUILD_SYSROOT=${SYSROOT_PREFIX}
