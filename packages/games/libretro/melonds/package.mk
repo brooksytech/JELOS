@@ -14,18 +14,8 @@ PKG_SECTION="libretro"
 PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 
-pre_make_target() {
-  if [[ "${DEVICE}" =~ RG351 ]]
-  then
-    PKG_MAKE_OPTS_TARGET=" platform=odroidgoa"
-  elif [[ "${DEVICE}" =~ RG552 ]]
-  then
-    PKG_MAKE_OPTS_TARGET=" platform=RK3399"
-  fi
-}
-
 make_target() {
-  make
+  make platform='rk3399'
 }
 makeinstall_target() {
   mkdir -p $INSTALL/usr/lib/libretro
