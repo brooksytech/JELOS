@@ -14,10 +14,9 @@ PKG_SECTION="libretro"
 PKG_SHORTDESC="MeloDS - Nintendo DS emulator for libretro"
 PKG_TOOLCHAIN="make"
 
-rm -rf CmakeList.txt
-
 pre_make_target() {
 
+  rm -rf CMakeList.txt
   if [[ "${DEVICE}" =~ RG351 ]]
   then
     PKG_MAKE_OPTS_TARGET=" platform=odroidgoa"
