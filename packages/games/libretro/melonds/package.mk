@@ -17,6 +17,7 @@ PKG_TOOLCHAIN="make"
 pre_make_target() {
 
   rm -rf CMakeList.txt
+  
   if [[ "${DEVICE}" =~ RG351 ]]
   then
     PKG_MAKE_OPTS_TARGET=" platform=odroidgoa"
