@@ -16,7 +16,7 @@ PKG_TOOLCHAIN="make"
 
 pre_make_target() {
 
-  rm -rf CMakeList.txt
+  rm -rf CMakeLists.txt
   
   if [[ "${DEVICE}" =~ RG351 ]]
   then
