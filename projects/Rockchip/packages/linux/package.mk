@@ -5,9 +5,14 @@
 # Copyright (C) 2022-present Fewtarius
 
 PKG_NAME="linux"
-PKG_URL="https://github.com/JustEnoughLinuxOS/rockchip-kernel.git"
-PKG_VERSION="1a8d74081"
-PKG_GIT_CLONE_BRANCH="main"
+#PKG_URL="https://github.com/JustEnoughLinuxOS/rockchip-kernel.git"
+#PKG_VERSION="1a8d74081"
+#PKG_GIT_CLONE_BRANCH="main"
+
+### Maya's kernel
+PKG_URL="https://github.com/R-ARM/kernel.git"
+PKG_VERSION="d48ee7a"
+
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kernel.org"
 PKG_DEPENDS_HOST="ccache:host openssl:host"
