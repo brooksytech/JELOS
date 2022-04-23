@@ -5,11 +5,16 @@
 PKG_NAME="u-boot"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="GPL"
-PKG_SITE="https://github.com/JustEnoughLinuxOS/rockchip-uboot"
+#PKG_SITE="https://github.com/JustEnoughLinuxOS/rockchip-uboot"
+#PKG_VERSION="23f4a5d"
+
+### mainline uboot.
+PKG_SITE="https://github.com/u-boot/u-boot.git"
+PKG_VERSION="9bb99fa"
+
 PKG_DEPENDS_TARGET="toolchain swig:host rkbin"
 PKG_LONGDESC="Rockchip U-Boot is a bootloader for embedded systems."
 PKG_URL="${PKG_SITE}.git"
-PKG_VERSION="23f4a5d"
 GET_HANDLER_SUPPORT="git"
 
 if [[ "${DEVICE}" =~ RG351 ]]
