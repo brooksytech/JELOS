@@ -9,7 +9,7 @@ PKG_LICENSE="GPL"
 #PKG_VERSION="23f4a5d"
 
 ### mainline uboot.
-PKG_SITE="https://github.com/u-boot/u-boot.git"
+PKG_SITE="https://github.com/u-boot/u-boot"
 PKG_VERSION="9bb99fa"
 
 PKG_DEPENDS_TARGET="toolchain swig:host rkbin"
