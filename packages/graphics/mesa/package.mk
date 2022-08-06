@@ -74,9 +74,9 @@ else
 fi
 
 if [ "${OPENGLES_SUPPORT}" = "yes" ]; then
-  PKG_MESON_OPTS_TARGET+=" -Dgles1=disabled -Dgles2=enabled -Dglx=dri"
+  PKG_MESON_OPTS_TARGET+=" -Dgles1=disabled -Dgles2=enabled"
 else
-  PKG_MESON_OPTS_TARGET+=" -Dgles1=disabled -Dgles2=disabled -Dglx=dri"
+  PKG_MESON_OPTS_TARGET+=" -Dgles1=disabled -Dgles2=disabled"
 fi
 
 if [ "${VULKAN_SUPPORT}" = "yes" ]; then

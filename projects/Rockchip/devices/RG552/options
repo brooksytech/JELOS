@@ -48,13 +48,13 @@
     HW_CPU="Rockchip RK3399"
  
   # Mali GPU family
-#    MALI_FAMILY="midgard-t86x"
-#   MALI_VERSION="r18p0"
-#    OPENGLES="libmali"
-#    GRAPHIC_DRIVERS=""
+    MALI_FAMILY="midgard-t86x"
+   MALI_VERSION="r18p0"
+    OPENGLES="libmali"
+    GRAPHIC_DRIVERS=""
 
   # OpenGL(X) implementation to use (mesa / no)
-  OPENGL="mesa"
+#  OPENGL="mesa"
 
   # OpenGL-ES implementation to use (mesa / no)
 #  OPENGLES="no"
