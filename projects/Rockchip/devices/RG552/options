@@ -30,9 +30,10 @@
     KERNEL_TARGET="Image"
     BOOTLOADER="u-boot"
     PARTITION_TABLE="msdos"
-    DEVICE_DTB="rk3399-rg552-linux"
+    DEVICE_DTB="rk3399-rg552"
     UBOOT_DTB="${DEVICE_DTB}"
     UBOOT_CONFIG="evb-rk3399_defconfig"
+    #UBOOT_CONFIG="ragnarok_rk3399_defconfig"
     PKG_SOC="rk3399"
     PKG_DATAFILE="$PKG_RKBIN/bin/rk33/rk3399_ddr_933MHz_v1.25.bin"
     PKG_LOADER="$PKG_RKBIN/bin/rk33/rk3399_miniloader_v1.26.bin"
@@ -48,9 +49,15 @@
  
   # Mali GPU family
     MALI_FAMILY="midgard-t86x"
-    MALI_VERSION="r18p0"
+   MALI_VERSION="r18p0"
     OPENGLES="libmali"
     GRAPHIC_DRIVERS=""
+
+  # OpenGL(X) implementation to use (mesa / no)
+#  OPENGL="mesa"
+
+  # OpenGL-ES implementation to use (mesa / no)
+#  OPENGLES="no"
 
   # kernel serial console
     EXTRA_CMDLINE="quiet video=DSI-1:1152x1920p60 fbcon=rotate:3 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
@@ -67,7 +74,7 @@
   # for a list of additional drivers see packages/linux-drivers
   # Space separated list is supported,
   # e.g. ADDITIONAL_DRIVERS="DRIVER1 DRIVER2"
-    ADDITIONAL_DRIVERS="RTL8812AU RTL8814AU RTL8821AU RTL8821CU RTL88x2BU"
+  #  ADDITIONAL_DRIVERS="RTL8812AU RTL8814AU RTL8821AU RTL8821CU RTL88x2BU"
 
   # build and install driver addons (yes / no)
     DRIVER_ADDONS_SUPPORT="no"
