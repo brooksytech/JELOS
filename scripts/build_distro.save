@@ -59,7 +59,7 @@ then
 fi
 
 # Clean OS specific packages.
-PKG_CLEAN="${PKG_CLEAN} linux"
+#PKG_CLEAN="${PKG_CLEAN} initramfs busybox linux grub u-boot"
 #PKG_CLEAN="${PKG_CLEAN} system-utils plymouth-lite initramfs busybox linux grub u-boot SDL2 modules \
  #          emulationstation retroarch lib32 jelos"
 

@@ -23,6 +23,8 @@ if [[ "${DEVICE}" =~ RG552 ]]
 then
   PKG_URL="https://github.com/R-ARM/kernel.git"
   PKG_VERSION="81ca1abcdfb9c7681408ff282ff65bb645c495e6"
+ # PKG_URL="https://github.com/notime2d8/5.10-rockchip.git"
+  #PKG_VERSION="b589a7ef68be72314185f280e12023878366263f"
   PKG_GIT_CLONE_BRANCH="master"
 
 elif [[ "${DEVICE}" =~ RG351 ]]

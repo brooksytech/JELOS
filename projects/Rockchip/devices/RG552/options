@@ -31,6 +31,7 @@
     BOOTLOADER="u-boot"
     PARTITION_TABLE="msdos"
     DEVICE_DTB="rk3399-rg552"
+#    DEVICE_DTB="rk3399-rg552-linux"
     UBOOT_DTB="${DEVICE_DTB}"
     UBOOT_CONFIG="evb-rk3399_defconfig"
     #UBOOT_CONFIG="ragnarok_rk3399_defconfig"
@@ -58,7 +59,7 @@
 
 #DISPLAYSERVER="weston"
   # OpenGL-ES implementation to use (mesa / no)
-#  OPENGLES="no"
+  #OPENGLES="mesa"
 
   # kernel serial console
     EXTRA_CMDLINE="quiet video=DSI-1:1152x1920p60 fbcon=rotate:3 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
