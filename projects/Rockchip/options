@@ -10,7 +10,7 @@
 
   # Kernel to use. values can be:
   # default:  default mainline kernel
-    LINUX="${LINUX:-rockchip-4.4}"
+#    LINUX="${LINUX:-rockchip-4.4}"
 
 ################################################################################
 # setup build defaults
