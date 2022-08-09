@@ -18,25 +18,21 @@ PKG_PATCH_DIRS+="${DEVICE}"
 PKG_GIT_CLONE_BRANCH="main"
 GET_HANDLER_SUPPORT="git"
 
-
-if [[ "${DEVICE}" =~ RG552 ]]
-then
-  PKG_URL="https://github.com/R-ARM/kernel.git"
-  PKG_VERSION="81ca1abcdfb9c7681408ff282ff65bb645c495e6"
- # PKG_URL="https://github.com/notime2d8/5.10-rockchip.git"
-#  PKG_VERSION="50daaed5ebf21742e4a3c291144abc579168fcdb"
-  #PKG_VERSION="b589a7ef68be72314185f280e12023878366263f"
-  PKG_GIT_CLONE_BRANCH="master"
-
-elif [[ "${DEVICE}" =~ RG351 ]]
-then
-  PKG_URL="https://github.com/JustEnoughLinuxOS/rg351x-kernel.git"
-  PKG_VERSION="effc106f9"
-elif [[ "${DEVICE}" =~ RG503 ]] || [[ "${DEVICE}" =~ RG353P ]]
-then
-  PKG_URL="https://github.com/JustEnoughLinuxOS/rk356x-kernel.git"
-  PKG_VERSION="e75a81b17"
-fi
+case ${DEVICE} in
+  RG351P|RG351V|RG351MP)
+    PKG_URL="${PKG_SITE}/rk3326-kernel.git"
+    PKG_VERSION="a19b4df7c"
+  ;;
+  RG552)
+    PKG_URL="https://github.com/R-ARM/kernel.git"
+    PKG_VERSION="81ca1abcdfb9c7681408ff282ff65bb645c495e6"
+    PKG_GIT_CLONE_BRANCH="master"
+  ;;
+  RG353P|RG503)
+    PKG_URL="${PKG_SITE}/rk356x-kernel.git"
+    PKG_VERSION="e75a81b17"
+  ;;
+esac
 
 PKG_KERNEL_CFG_FILE=$(kernel_config_path) || die
 

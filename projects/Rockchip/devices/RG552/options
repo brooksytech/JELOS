@@ -31,10 +31,8 @@
     BOOTLOADER="u-boot"
     PARTITION_TABLE="msdos"
     DEVICE_DTB="rk3399-rg552"
-#    DEVICE_DTB="rk3399-rg552-linux"
     UBOOT_DTB="${DEVICE_DTB}"
     UBOOT_CONFIG="evb-rk3399_defconfig"
-    #UBOOT_CONFIG="ragnarok_rk3399_defconfig"
     PKG_SOC="rk3399"
     PKG_DATAFILE="$PKG_RKBIN/bin/rk33/rk3399_ddr_933MHz_v1.25.bin"
     PKG_LOADER="$PKG_RKBIN/bin/rk33/rk3399_miniloader_v1.26.bin"
@@ -50,27 +48,27 @@
  
 
   # Mali GPU family
-    MALI_FAMILY="t860"
-    GRAPHIC_DRIVERS="panfrost"
+   MALI_FAMILY="t860"
+   GRAPHIC_DRIVERS="panfrost"
 
   # Mali GPU family
-#    MALI_FAMILY="midgard-t86x" 
- # MALI_VERSION="r18p0"
-  #  OPENGLES="libmali"
-   # GRAPHIC_DRIVERS=""
+   #MALI_FAMILY="midgard-t86x" 
+   #MALI_VERSION="r18p0"
+   #OPENGLES="libmali"
+   #GRAPHIC_DRIVERS=""
 
   # OpenGL(X) implementation to use (mesa / no)
- OPENGL="mesa"
+   OPENGL="mesa"
 
-#DISPLAYSERVER="weston"
   # OpenGL-ES implementation to use (mesa / no)
-  OPENGLES="mesa"
+   OPENGLES="mesa"
 
-# Displayserver to use (weston / x11 / no)
-  DISPLAYSERVER="weston"
+  # Displayserver to use (weston / x11 / no)
+  #DISPLAYSERVER="weston"
 
   # kernel serial console
-    EXTRA_CMDLINE="quiet video=DSI-1:1152x1920p60 fbcon=rotate:3 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
+    EXTRA_CMDLINE="video=DSI-1:1152x1920p60 fbcon=rotate:3"
+    #EXTRA_CMDLINE="quiet video=DSI-1:1152x1920p60 fbcon=rotate:3 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
 
   # additional packages to install
     #ADDITIONAL_PACKAGES=""
