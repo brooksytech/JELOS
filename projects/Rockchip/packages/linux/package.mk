@@ -21,12 +21,14 @@ GET_HANDLER_SUPPORT="git"
 
 if [[ "${DEVICE}" =~ RG552 ]]
 then
-  PKG_URL="https://github.com/R-ARM/kernel.git"
-  PKG_VERSION="81ca1abcdfb9c7681408ff282ff65bb645c495e6"
+  PKG_URL="https://github.com/brooksytech/5.10.git"
+PKG_VERSION="70799561e5485d8d855d61229a895b8d278935d9"
+#PKG_VERSION="5f16b87d5cfb65f7e6dcbfdeb02ae5b137cb8aa0"
  # PKG_URL="https://github.com/notime2d8/5.10-rockchip.git"
 #  PKG_VERSION="50daaed5ebf21742e4a3c291144abc579168fcdb"
   #PKG_VERSION="b589a7ef68be72314185f280e12023878366263f"
-  PKG_GIT_CLONE_BRANCH="master"
+  PKG_GIT_CLONE_BRANCH="test2"
+#  PKG_GIT_CLONE_BRANCH="master"
 
 elif [[ "${DEVICE}" =~ RG351 ]]
 then
