@@ -18,22 +18,21 @@ PKG_PATCH_DIRS+="${DEVICE}"
 PKG_GIT_CLONE_BRANCH="main"
 GET_HANDLER_SUPPORT="git"
 
-
-if [[ "${DEVICE}" =~ RG552 ]]
-then
-  PKG_URL="https://github.com/brooksytech/5.10.git"
-  PKG_VERSION="c5c4d08924c99068faf23f4e51b9d599650f88e"
-  PKG_GIT_CLONE_BRANCH="master"
-
-elif [[ "${DEVICE}" =~ RG351 ]]
-then
-  PKG_URL="https://github.com/JustEnoughLinuxOS/rg351x-kernel.git"
-  PKG_VERSION="effc106f9"
-elif [[ "${DEVICE}" =~ RG503 ]] || [[ "${DEVICE}" =~ RG353P ]]
-then
-  PKG_URL="https://github.com/JustEnoughLinuxOS/rk356x-kernel.git"
-  PKG_VERSION="e75a81b17"
-fi
+case ${DEVICE} in
+  RG351P|RG351V|RG351MP)
+    PKG_URL="${PKG_SITE}/rk3326-kernel.git"
+    PKG_VERSION="a19b4df7c"
+  ;;
+  RG552)
+    PKG_URL="https://github.com/brooksytech/5.10.git"
+    PKG_VERSION="c5c4d08924c99068faf23f4e51b9d599650f88e"
+    PKG_GIT_CLONE_BRANCH="master"
+  ;;
+  RG353P|RG503)
+    PKG_URL="${PKG_SITE}/rk356x-kernel.git"
+    PKG_VERSION="e75a81b17"
+  ;;
+esac
 
 PKG_KERNEL_CFG_FILE=$(kernel_config_path) || die
 
