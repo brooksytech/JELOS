@@ -1,5 +1,5 @@
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
-index 7de684ed1edc..fb94623cf906 100644
+index 7de684ed1edc..f907ed920a0b 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 @@ -93,7 +93,7 @@ adcmux: adc-mux {
@@ -110,7 +110,7 @@ index 7de684ed1edc..fb94623cf906 100644
  		fan-supply = <&vcc5v0_sys>;
  	};
  
-@@ -446,31 +446,87 @@ vcc_wifi: vcc-wifi-regulator {
+@@ -446,31 +446,109 @@ vcc_wifi: vcc-wifi-regulator {
  		regulator-always-on;
  		regulator-boot-on;
  	};
@@ -143,55 +143,77 @@ index 7de684ed1edc..fb94623cf906 100644
 +			opp-microvolt = <900000>;
 +		};
 +	};
-+};
-+
-+&cluster0_opp
-+{
-+	opp-1608000000 {
-+		opp-hz = /bits/ 64 <1608000000>;
-+		opp-microvolt = <1200000 1200000 1250000>;
-+	};
-+};
-+
-+&cluster1_opp
-+{
-+	opp-2088000000 {
-+		opp-hz = /bits/ 64 <2088000000>;
-+		opp-microvolt = <1250000 1250000 1250000>;
-+	};
  };
  
- &cpu_thermal {
+-&cpu_thermal {
 -        trips {
 -                cpu_warm: cpu_warm {
 -                        temperature = <55000>;
 -                        hysteresis = <2000>;
 -                        type = "active";
 -                };
-+	trips {
-+		cpu_warm: cpu_warm {
-+			temperature = <50000>;
-+			hysteresis = <2000>;
-+			type = "active";
-+		};
++&cluster0_opp {
++        opp-1512000000 {
++            opp-hz = /bits/ 64 <1512000000>;
++            opp-microvolt = <1200000>;
++        };
++        opp-1608000000 {
++            opp-hz = /bits/ 64 <1608000000>;
++            opp-microvolt = <1200000>;
++        };
++        opp-1704000000 {
++            opp-hz = /bits/ 64 <1704000000>;
++            opp-microvolt = <1225000>;
++        };
++};
  
 -                cpu_hot: cpu_hot {
 -                        temperature = <65000>;
 -                        hysteresis = <2000>;
 -                        type = "active";
 -                };
--        };
-+		cpu_hot: cpu_hot {
-+			temperature = <55000>;
-+			hysteresis = <2000>;
-+			type = "active";
-+		};
++&cluster1_opp {
++	opp-1992000000 {
++            opp-hz = /bits/ 64 <1992000000>;
++            opp-microvolt = <1250000>;
++	};
++        opp-2016000000 {
++            opp-hz = /bits/ 64 <2016000000>;
++            opp-microvolt = <1250000>;
++        };
++        opp-2040000000 {
++            opp-hz = /bits/ 64 <2040000000>;
++            opp-microvolt = <1250000>;
++        };
++        opp-2088000000 {
++            opp-hz = /bits/ 64 <2088000000>;
++            opp-microvolt = <1250000>;
+         };
++        opp-2184000000 {
++            opp-hz = /bits/ 64 <2184000000>;
++            opp-microvolt = <1350000>;
++        };
++};
  
 -        cooling-maps {
 -                map2 {
 -                        trip = <&cpu_warm>;
 -                        cooling-device = <&fan THERMAL_NO_LIMIT 1>;
 -                };
++&cpu_thermal {
++	trips {
++		cpu_warm: cpu_warm {
++			temperature = <50000>;
++			hysteresis = <2000>;
++			type = "active";
++		};
++
++		cpu_hot: cpu_hot {
++			temperature = <55000>;
++			hysteresis = <2000>;
++			type = "active";
++		};
++
 +		cpu_scalding: cpu_scalding {
 +			temperature = <65000>;
 +			hysteresis = <5000>;
@@ -216,7 +238,7 @@ index 7de684ed1edc..fb94623cf906 100644
                          cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
                  };
          };
-@@ -505,43 +561,35 @@ &saradc {
+@@ -505,43 +583,35 @@ &saradc {
  };
  
  &sdio0 {
@@ -279,7 +301,16 @@ index 7de684ed1edc..fb94623cf906 100644
  	status = "okay";
  };
  
-@@ -755,7 +803,7 @@ vcc_sdio: LDO_REG4 {
+@@ -615,7 +685,7 @@ panel@0 {
+ 		reg = <0>;
+ 		compatible = "sharp,ls054b3sx01";
+ 		backlight = <&backlight>;
+-		rotation = <270>;
++		rotation = <90>;
+ 
+ 		iovcc-supply = <&vcc1v8_dvp>;
+ 		vsp-supply = <&vcc5v5_lcd>;
+@@ -755,7 +825,7 @@ vcc_sdio: LDO_REG4 {
  				regulator-always-on;
  				regulator-boot-on;
  				regulator-min-microvolt = <1800000>;
@@ -288,7 +319,7 @@ index 7de684ed1edc..fb94623cf906 100644
  				regulator-state-mem {
  					regulator-on-in-suspend;
  					regulator-suspend-microvolt = <3000000>;
-@@ -851,6 +899,7 @@ vdd_gpu: regulator@41 {
+@@ -851,6 +921,7 @@ vdd_gpu: regulator@41 {
  		compatible = "silergy,syr828";
  		reg = <0x41>;
  		fcs,suspend-voltage-selector = <1>;
@@ -296,7 +327,31 @@ index 7de684ed1edc..fb94623cf906 100644
  		pinctrl-names = "default";
  		pinctrl-0 = <&vsel2_pin>;
  		regulator-name = "vdd_gpu";
-@@ -1026,12 +1075,12 @@ vsel2_pin: vsel2-pin {
+@@ -990,15 +1061,15 @@ &pmu_io_domains {
+ };
+ 
+ &pinctrl {
+-	es8316 {
+-		hp_det_pin: hp-det-pin {
+-				rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
+-		};
++        es8316 {
++                hp_det_pin: hp-det-pin {
++                        rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
++                };
+ 
+-		spk_en_pin: spk-en-pin {
+-			rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
+-		};
+-	};
++                spk_en_pin: spk-en-pin {
++                        rockchip,pins = <1 RK_PC5 RK_FUNC_GPIO &pcfg_pull_down>;
++                };
++        };
+ 
+         i2s1 {
+                 i2s_8ch_mclk_pin: i2s-8ch-mclk-pin {
+@@ -1026,12 +1097,12 @@ vsel2_pin: vsel2-pin {
  		};
  	};
  
@@ -314,7 +369,7 @@ index 7de684ed1edc..fb94623cf906 100644
  
  	sdio-pwrseq {
  		wifi_enable_h: wifi-enable-h {
-@@ -1189,8 +1238,7 @@ &usbdrd3_0 {
+@@ -1189,8 +1260,7 @@ &usbdrd3_0 {
  
  &usbdrd_dwc3_0 {
  	status = "okay";
