@@ -1,5 +1,5 @@
 diff --git a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
-index 7de684ed1edc..f907ed920a0b 100644
+index 7de684ed1edc..3f2e625f84b7 100644
 --- a/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 +++ b/arch/arm64/boot/dts/rockchip/rk3399-rg552.dts
 @@ -93,7 +93,7 @@ adcmux: adc-mux {
@@ -31,7 +31,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  	};
  
 -	gamepad {
-+	gpio-gamepad {
++	retrogame_joypad {
  		compatible = "gpio-keys";
  		pinctrl-names = "default";
  		pinctrl-0 = <&btn_pins>;
@@ -44,7 +44,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  		        linux,code = <BTN_EAST>;
  		};
  		sw6 {
-@@ -178,47 +178,47 @@ sw8 {
+@@ -178,51 +178,70 @@ sw8 {
  		};
  		sw9 {
  		        gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_LOW>;
@@ -101,7 +101,30 @@ index 7de684ed1edc..f907ed920a0b 100644
  		        linux,code = <BTN_THUMBR>;
  		};
  	};
-@@ -276,7 +276,7 @@ fan: pwm-fan {
+ 
++	leds: gpio-leds {
++			compatible = "gpio-leds";
++			pinctrl-names = "default";
++			pinctrl-0 =<&leds_gpio>;
++
++			led@1 {
++					gpios = <&gpio1 RK_PC4 GPIO_ACTIVE_HIGH>;
++					label = "battery_green";
++					default-state= "on";
++				//	retain-state-suspended;
++			};
++			
++			led@2 {
++					gpios = <&gpio3 RK_PD5 GPIO_ACTIVE_HIGH>;
++					label = "battery_red";
++				//	retain-state-suspended;
++			};
++			
++	};
+         vibrator {
+                 compatible = "pwm-vibrator";
+                 pwms = <&pwm3 0 200000000 0>;
+@@ -276,7 +295,7 @@ fan: pwm-fan {
  		compatible = "pwm-fan";
  		pwms = <&pwm1 0 10000 1>;
  		#cooling-cells = <2>;
@@ -110,7 +133,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  		fan-supply = <&vcc5v0_sys>;
  	};
  
-@@ -446,31 +446,109 @@ vcc_wifi: vcc-wifi-regulator {
+@@ -446,31 +465,109 @@ vcc_wifi: vcc-wifi-regulator {
  		regulator-always-on;
  		regulator-boot-on;
  	};
@@ -184,11 +207,11 @@ index 7de684ed1edc..f907ed920a0b 100644
 +        opp-2040000000 {
 +            opp-hz = /bits/ 64 <2040000000>;
 +            opp-microvolt = <1250000>;
-+        };
+         };
 +        opp-2088000000 {
 +            opp-hz = /bits/ 64 <2088000000>;
 +            opp-microvolt = <1250000>;
-         };
++        };
 +        opp-2184000000 {
 +            opp-hz = /bits/ 64 <2184000000>;
 +            opp-microvolt = <1350000>;
@@ -238,7 +261,7 @@ index 7de684ed1edc..f907ed920a0b 100644
                          cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
                  };
          };
-@@ -505,43 +583,35 @@ &saradc {
+@@ -505,43 +602,35 @@ &saradc {
  };
  
  &sdio0 {
@@ -301,16 +324,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  	status = "okay";
  };
  
-@@ -615,7 +685,7 @@ panel@0 {
- 		reg = <0>;
- 		compatible = "sharp,ls054b3sx01";
- 		backlight = <&backlight>;
--		rotation = <270>;
-+		rotation = <90>;
- 
- 		iovcc-supply = <&vcc1v8_dvp>;
- 		vsp-supply = <&vcc5v5_lcd>;
-@@ -755,7 +825,7 @@ vcc_sdio: LDO_REG4 {
+@@ -755,7 +844,7 @@ vcc_sdio: LDO_REG4 {
  				regulator-always-on;
  				regulator-boot-on;
  				regulator-min-microvolt = <1800000>;
@@ -319,7 +333,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  				regulator-state-mem {
  					regulator-on-in-suspend;
  					regulator-suspend-microvolt = <3000000>;
-@@ -851,6 +921,7 @@ vdd_gpu: regulator@41 {
+@@ -851,6 +940,7 @@ vdd_gpu: regulator@41 {
  		compatible = "silergy,syr828";
  		reg = <0x41>;
  		fcs,suspend-voltage-selector = <1>;
@@ -327,7 +341,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  		pinctrl-names = "default";
  		pinctrl-0 = <&vsel2_pin>;
  		regulator-name = "vdd_gpu";
-@@ -990,15 +1061,15 @@ &pmu_io_domains {
+@@ -990,15 +1080,15 @@ &pmu_io_domains {
  };
  
  &pinctrl {
@@ -351,7 +365,7 @@ index 7de684ed1edc..f907ed920a0b 100644
  
          i2s1 {
                  i2s_8ch_mclk_pin: i2s-8ch-mclk-pin {
-@@ -1026,12 +1097,12 @@ vsel2_pin: vsel2-pin {
+@@ -1026,12 +1116,12 @@ vsel2_pin: vsel2-pin {
  		};
  	};
  
@@ -369,7 +383,22 @@ index 7de684ed1edc..f907ed920a0b 100644
  
  	sdio-pwrseq {
  		wifi_enable_h: wifi-enable-h {
-@@ -1189,8 +1260,7 @@ &usbdrd3_0 {
+@@ -1051,6 +1141,14 @@ vcc5v0_host_en: vcc5v0-host-en {
+ 		};
+ 	};
+ 
++	gpio-leds {
++		leds_gpio: leds-gpio {
++					rockchip,pins =
++							<1 RK_PC4 RK_FUNC_GPIO &pcfg_pull_up>,
++							<3 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
++			};
++	};
++
+ 	lcd-panel {
+ 		lcd_reset_gpio: lcd-reset-gpio {
+ 			rockchip,pins = <0 RK_PB2 RK_FUNC_GPIO &pcfg_pull_none>;
+@@ -1189,8 +1287,7 @@ &usbdrd3_0 {
  
  &usbdrd_dwc3_0 {
  	status = "okay";
