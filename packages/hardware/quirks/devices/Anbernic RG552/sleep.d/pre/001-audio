@@ -6,6 +6,16 @@
 
 . /etc/profile
 
+
+# Set export gpio for speaker amp gpio
+if [ ! -d "/sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}" ]; then
+  echo ${DEVICE_SPK_AMP_GPIO} > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/direction
+fi
+
+# Turn off speaker amp on sleep
+echo 0 > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/value
+
 HDMI=$(pactl list sinks short | grep hdmi | cut -c 0-2)
 SPEAKER=$(pactl list sinks short | grep es8316 | cut -c 0-2)
 

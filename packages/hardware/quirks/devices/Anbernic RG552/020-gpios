@@ -6,6 +6,7 @@ cat <<EOF >/storage/.config/profile.d/020-gpios
 DEVICE_JACK="8"
 DEVICE_HDMI_GPIO="54"
 DEVICE_WIFI="113"
+DEVICE_SPK_AMP_GPIO="53"
 EOF
 
 . /storage/.config/profile.d/020-gpios

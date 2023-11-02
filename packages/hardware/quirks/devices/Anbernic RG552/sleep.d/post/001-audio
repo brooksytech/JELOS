@@ -9,8 +9,9 @@
 HDMI=$(pactl list sinks short | grep hdmi | cut -c 0-2)
 SPEAKER=$(pactl list sinks short | grep es8316 | cut -c 0-2)
 
-#Set sink to one we aren't currently using
+#Set sink to speaker
 pactl set-default-sink ${SPEAKER}
+
 
 #Then check if HDMI is plugged and switch to HDMI
 
@@ -20,7 +21,7 @@ if [ ! -d "/sys/class/gpio/gpio${DEVICE_HDMI_GPIO}" ]; then
   echo in > /sys/class/gpio/gpio${DEVICE_HDMI_GPIO}/direction
 fi
 
-# Check HDMI plug state and switch to HDMI audo if true
+# Check HDMI plug state and switch to HDMI audio if true
 HDMI_VALUE=$(cat /sys/class/gpio/gpio${DEVICE_HDMI_GPIO}/value)
   case ${HDMI_VALUE} in
     "0")
@@ -28,3 +29,13 @@ HDMI_VALUE=$(cat /sys/class/gpio/gpio${DEVICE_HDMI_GPIO}/value)
       pactl set-default-sink ${HDMI}
     ;;
   esac
+
+
+# Set export gpio for speaker amp gpio
+if [ ! -d "/sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}" ]; then
+  echo ${DEVICE_SPK_AMP_GPIO} > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/direction
+fi
+
+# Turn on speaker amp on wake
+echo 1 > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/value

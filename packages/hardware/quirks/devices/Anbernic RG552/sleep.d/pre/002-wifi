@@ -1,0 +1,17 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
+
+# Turn off wifi power gpio on sleep
+
+. /etc/profile
+
+# Set export gpio for wifi
+if [ ! -d "/sys/class/gpio/gpio${DEVICE_WIFI}" ]; then
+  echo ${DEVICE_WIFI} > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio${DEVICE_WIFI}/direction
+fi
+
+# Turn off gpio for wifi
+echo 0 > /sys/class/gpio/gpio${DEVICE_WIFI}/value
+

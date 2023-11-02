@@ -1,18 +1,19 @@
 #!/bin/sh
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
-# SPDX-License-Identifier: GPL-2.0-or-later
-# Copyright (C) 2022-present - The JELOS Project (https://github.com/JustEnoughLinuxOS)
+# Set user gpio wifi state on wake
 
-. /etc/profile.d/001-functions
+. /etc/profile
 
-# Get Internal Wifi State
+# Get internal wifi state
 INTERNAL_WIFI_STATE=$(get_setting "internal.wifi")
 if [ ! -n "${INTERNAL_WIFI_STATE}" ]; then
   INTERNAL_WIFI_STATE=1
   set_setting "internal.wifi" "1"
 fi
 
-# Set export GPIO for Wifi and set state
+# Set export gpio for wifi
 if [ ! -d "/sys/class/gpio/gpio${DEVICE_WIFI}" ]; then
   echo ${DEVICE_WIFI} > /sys/class/gpio/export
   echo out > /sys/class/gpio/gpio${DEVICE_WIFI}/direction

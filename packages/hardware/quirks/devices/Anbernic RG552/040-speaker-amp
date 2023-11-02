@@ -1,0 +1,14 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
+
+. /etc/profile
+
+# Set export gpio for wifi and enable
+if [ ! -d "/sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}" ]; then
+  echo ${DEVICE_SPK_AMP_GPIO} > /sys/class/gpio/export
+  echo out > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/direction
+fi
+
+# Enable speaker amp at boot
+echo 1 > /sys/class/gpio/gpio${DEVICE_SPK_AMP_GPIO}/value
