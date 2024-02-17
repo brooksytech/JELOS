@@ -17,11 +17,11 @@ PKG_PATCH_DIRS+="${DEVICE}"
 
 case ${DEVICE} in
   RK358*)
-    PKG_VERSION="eef98210c4984831d1706f884c95eec132c791e1"
-    PKG_URL="${PKG_SITE}/rk358x-kernel.git"
-    GET_HANDLER_SUPPORT="git"
-    PKG_GIT_CLONE_BRANCH="main"
+    PKG_VERSION="60c00a5eccfb875d306bcf39430257df6a535d99"
+    PKG_URL="https://gitlab.collabora.com/hardware-enablement/rockchip-3588/linux.git"
+    PKG_GIT_CLONE_BRANCH="rk3588"
   ;;
+
   RK3399|RK3326|RK-ARMV8-A)
     PKG_VERSION="6.7.5"
     PKG_URL="https://www.kernel.org/pub/linux/kernel/v6.x/${PKG_NAME}-${PKG_VERSION}.tar.xz"

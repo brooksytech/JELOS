@@ -1,0 +1,36 @@
+diff -rupN u-boot.orig/configs/evb-rk3588_defconfig u-boot/configs/evb-rk3588_defconfig
+--- u-boot.orig/configs/evb-rk3588_defconfig	2024-02-17 04:17:29.053179438 +0000
++++ u-boot/configs/evb-rk3588_defconfig	2024-02-17 04:18:30.242589696 +0000
+@@ -25,7 +25,7 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-evb1-v10.dtb"
++CONFIG_DEFAULT_FDT_FILE="rk3588s-gameforce-ace.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+diff -rupN u-boot.orig/configs/orangepi-5-rk3588s_defconfig u-boot/configs/orangepi-5-rk3588s_defconfig
+--- u-boot.orig/configs/orangepi-5-rk3588s_defconfig	2024-02-17 04:17:29.057179530 +0000
++++ u-boot/configs/orangepi-5-rk3588s_defconfig	2024-02-17 16:12:45.502365819 +0000
+@@ -31,7 +31,7 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-orangepi-5.dtb"
++CONFIG_DEFAULT_FDT_FILE="rk3588s-gameforce-ace.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
+diff -rupN u-boot.orig/configs/rock5a-rk3588s_defconfig u-boot/configs/rock5a-rk3588s_defconfig
+--- u-boot.orig/configs/rock5a-rk3588s_defconfig	2024-02-17 04:17:29.057179530 +0000
++++ u-boot/configs/rock5a-rk3588s_defconfig	2024-02-17 04:54:50.252304651 +0000
+@@ -25,7 +25,7 @@ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_OF_BOARD_SETUP=y
+-CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
++CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-gameforce-ace.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000

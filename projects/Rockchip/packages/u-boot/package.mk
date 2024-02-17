@@ -13,9 +13,9 @@ PKG_PATCH_DIRS+="${DEVICE}"
 
 case ${DEVICE} in
  RK358*)
-    PKG_URL="${PKG_SITE}/rk35xx-uboot.git"
-    PKG_VERSION="d34ff0716"
-    PKG_GIT_CLONE_BRANCH="v2017.09-rk3588"
+    PKG_URL="https://gitlab.collabora.com/hardware-enablement/rockchip-3588/u-boot.git"
+    PKG_VERSION="5557bfdc869a2b4f5c5394e6702d32ed5768c7ba"
+    PKG_GIT_CLONE_BRANCH="rk3588"
   ;;
   RK356*)
     PKG_URL="https://github.com/u-boot/u-boot.git"
@@ -85,8 +85,11 @@ make_target() {
       DEBUG=${PKG_DEBUG} CROSS_COMPILE="${TARGET_KERNEL_PREFIX}" LDFLAGS="" ARCH=arm64 _python_sysroot="${TOOLCHAIN}" _python_prefix=/ _python_exec_prefix=/ make HOSTCC="${HOST_CC}" HOSTLDFLAGS="-L${TOOLCHAIN}/lib" HOSTCFLAGS="-I${TOOLCHAIN}/include" HOSTSTRIP="true" CONFIG_MKIMAGE_DTC_PATH="scripts/dtc/dtc"
 	elif [[ "${PKG_SOC}" =~ "rk3588" ]]
 	then
+      export BL31="${PKG_BL31}"
+      export ROCKCHIP_TPL="${PKG_DATAFILE}"
+
 	  DEBUG=${PKG_DEBUG} CROSS_COMPILE="${TARGET_KERNEL_PREFIX}" LDFLAGS="" ARCH=arm64 make mrproper
-      DEBUG=${PKG_DEBUG} CROSS_COMPILE="${TARGET_KERNEL_PREFIX}" LDFLAGS="" ARCH=arm64 make ${UBOOT_CONFIG} BL31=${PKG_BL31} ${PKG_LOADER} u-boot.dtb u-boot.itb CONFIG_MKIMAGE_DTC_PATH="scripts/dtc/dtc"
+      DEBUG=${PKG_DEBUG} CROSS_COMPILE="${TARGET_KERNEL_PREFIX}" LDFLAGS="" ARCH=arm64 make ${UBOOT_CONFIG} BL31=${PKG_BL31} ${PKG_LOADER} u-boot.dtb u-boot.img CONFIG_MKIMAGE_DTC_PATH="scripts/dtc/dtc"
       DEBUG=${PKG_DEBUG} CROSS_COMPILE="${TARGET_KERNEL_PREFIX}" LDFLAGS="" ARCH=arm64 _python_sysroot="${TOOLCHAIN}" _python_prefix=/ _python_exec_prefix=/ make HOSTCC="${HOST_CC}" HOSTLDFLAGS="-L${TOOLCHAIN}/lib" HOSTSTRIP="true" CONFIG_MKIMAGE_DTC_PATH="scripts/dtc/dtc"
 	else
 	  # rk3326 and rk3399 devices

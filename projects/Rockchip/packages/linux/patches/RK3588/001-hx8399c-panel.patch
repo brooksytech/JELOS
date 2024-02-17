@@ -1,0 +1,146 @@
+diff -rupN linux.orig/drivers/gpu/drm/panel/panel-himax-hx8394.c linux/drivers/gpu/drm/panel/panel-himax-hx8394.c
+--- linux.orig/drivers/gpu/drm/panel/panel-himax-hx8394.c	2024-02-17 04:22:12.791057097 +0000
++++ linux/drivers/gpu/drm/panel/panel-himax-hx8394.c	2024-02-17 22:06:05.801004048 +0000
+@@ -54,6 +54,7 @@
+ #define HX8394_CMD_SETGIP2	  0xd6
+ #define HX8394_CMD_SETGPO	  0xd6
+ #define HX8394_CMD_UNKNOWN4	  0xd8
++#define HX8394_CMD_SETGIP3	  0xd8
+ #define HX8394_CMD_SETSCALING	  0xdd
+ #define HX8394_CMD_SETIDLE	  0xdf
+ #define HX8394_CMD_SETGAMMA	  0xe0
+@@ -339,6 +340,126 @@ static const struct hx8394_panel_desc po
+ 	.init_sequence = powkiddy_x55_init_sequence,
+ };
+ 
++static int gameforce_ace_init_sequence(struct hx8394 *ctx)
++{
++	struct mipi_dsi_device *dsi = to_mipi_dsi_device(ctx->dev);
++
++	/* SETEXTC: Set extension command (B9h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETEXTC,
++			       0xff, 0x83, 0x99);
++
++	/* SETOFFSET (D2h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETOFFSET,
++			       0x77);
++
++	/* SETPOWER: Set power (B1h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETPOWER,
++				0x02, 0x04, 0x74, 0x94, 0x01, 0x32, 0x33, 0x11, 0x11, 0xAB,
++				0x4D, 0x56, 0x73, 0x02, 0x02);
++
++	/* SETDISP: Set display related register (B2h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETDISP,
++				0x00, 0x80, 0x80, 0xAE, 0x05, 0x07, 0x5A, 0x11, 0x00, 0x00,
++				0x10, 0x1E, 0x70, 0x03, 0xD4);
++
++	/* SETCYC: Set display waveform cycles (B4h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETCYC,
++				0x00, 0xFF, 0x02, 0xC0, 0x02, 0xC0, 0x00, 0x00, 0x08, 0x00, 0x04,
++				0x06, 0x00, 0x32, 0x04, 0x0A, 0x08, 0x21, 0x03, 0x01, 0x00, 0x0F,
++				0xB8, 0x8B, 0x02, 0xC0, 0x02, 0xC0, 0x00, 0x00, 0x08, 0x00, 0x04,
++				0x06, 0x00, 0x32, 0x04, 0x0A, 0x08, 0x01, 0x00, 0x0F, 0xB8, 0x01);
++
++	/* SETGIP0: Set GIP Option0 (D3h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP0,
++				0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x10, 0x04,
++				0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
++				0x00, 0x01, 0x00, 0x05, 0x05, 0x07, 0x00, 0x00, 0x00, 0x05, 0x40);
++
++	/* Set GIP Option1 (D5h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP1,
++				0x18, 0x18, 0x19, 0x19, 0x18, 0x18, 0x21, 0x20, 0x01, 0x00, 0x07,
++				0x06, 0x05, 0x04, 0x03, 0x02, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18,
++				0x2F, 0x2F, 0x30, 0x30, 0x31, 0x31, 0x18, 0x18, 0x18, 0x18);
++
++	/* Set GIP Option2 (D6h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP2,
++				0x18, 0x18, 0x19, 0x19, 0x40, 0x40, 0x20, 0x21, 0x02, 0x03, 0x04,
++				0x05, 0x06, 0x07, 0x00, 0x01, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40,
++				0x2F, 0x2F, 0x30, 0x30, 0x31, 0x31, 0x40, 0x40, 0x40, 0x40);
++
++	/* Set GIP Option3 (D8h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP3,
++				0xA2, 0xAA, 0x02, 0xA0, 0xA2, 0xA8, 0x02, 0xA0, 0xB0, 0x00, 0x00,
++				0x00, 0xB0, 0x00, 0x00, 0x00);
++
++	/* Set register bank (BDh) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETREGBANK,
++			       0x01);
++
++	/* Set GIP Option3 (D8h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP3,
++				0xB0, 0x00, 0x00, 0x00, 0xB0, 0x00, 0x00, 0x00, 0xE2, 0xAA, 0x03,
++				0xF0, 0xE2, 0xAA, 0x03, 0xF0);
++
++	/* Set register bank (BDh) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETREGBANK,
++				0x02);
++
++	/* Set GIP Option3 (D8h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGIP3,
++				0xE2, 0xAA, 0x03, 0xF0, 0xE2, 0xAA, 0x03, 0xF);
++
++	/* Set register bank (BDh) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETREGBANK,
++				0x00);
++
++	/* SETVCOM: Set VCOM voltage (B6h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETVCOM,
++				0x7A, 0x7A);
++
++	/* SETGAMMA: Set gamma curve related setting (E0h) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETGAMMA,
++				0x00, 0x18, 0x27, 0x24, 0x5A, 0x68, 0x79, 0x78, 0x81, 0x8A, 0x92,
++				0x99, 0x9E, 0xA7, 0xAF, 0xB4, 0xB9, 0xC3, 0xC7, 0xD1, 0xC6, 0xD4,
++				0xD5, 0x6C, 0x67, 0x71, 0x77, 0x00, 0x00, 0x18, 0x27, 0x24, 0x5A,
++				0x68, 0x79, 0x78, 0x81, 0x8A, 0x92, 0x99, 0x9E, 0xA7, 0xAF, 0xB4,
++				0xB9, 0xC3, 0xC7, 0xD1, 0xC6, 0xD4, 0xD5, 0x6C, 0x67, 0x77);
++
++	/* Unknown command, C6h,  not listed in the HX8399-c datasheet */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_UNKNOWN2,
++				0xFF, 0xF9);
++
++	/* SETPANEL (CCh) */
++	mipi_dsi_dcs_write_seq(dsi, HX8394_CMD_SETPANEL,
++				0x08);
++
++	return 0;
++}
++
++static const struct drm_display_mode gameforce_ace_mode = {
++	.hdisplay	= 1080,
++	.hsync_start	= 1080 + 32,
++	.hsync_end	= 1080 + 32 + 8,
++	.htotal		= 1080 + 32 + 8 + 32,
++	.vdisplay	= 1920,
++	.vsync_start	= 1920 + 16,
++	.vsync_end	= 1920 + 16 + 2,
++	.vtotal		= 1920 + 16 + 2 + 14,
++	.clock		= 12400,
++	.flags		= DRM_MODE_FLAG_NHSYNC | DRM_MODE_FLAG_NVSYNC,
++	.width_mm	= 68,
++	.height_mm	= 120,
++};
++
++static const struct hx8394_panel_desc gameforce_ace_desc = {
++	.mode = &gameforce_ace_mode,
++	.lanes = 4,
++	.mode_flags = MIPI_DSI_MODE_VIDEO | MIPI_DSI_MODE_VIDEO_BURST |
++		      MIPI_DSI_MODE_LPM | MIPI_DSI_MODE_NO_EOT_PACKET,
++	.format = MIPI_DSI_FMT_RGB888,
++	.init_sequence = gameforce_ace_init_sequence,
++};
++
+ static int hx8394_enable(struct drm_panel *panel)
+ {
+ 	struct hx8394 *ctx = panel_to_hx8394(panel);
+@@ -556,6 +677,7 @@ static void hx8394_remove(struct mipi_ds
+ static const struct of_device_id hx8394_of_match[] = {
+ 	{ .compatible = "hannstar,hsd060bhw4", .data = &hsd060bhw4_desc },
+ 	{ .compatible = "powkiddy,x55-panel", .data = &powkiddy_x55_desc },
++	{ .compatible = "gameforce,ace-panel", .data = &gameforce_ace_desc },
+ 	{ /* sentinel */ }
+ };
+ MODULE_DEVICE_TABLE(of, hx8394_of_match);
