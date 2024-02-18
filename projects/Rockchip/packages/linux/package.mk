@@ -119,12 +119,6 @@ makeinstall_host() {
 }
 
 pre_make_target() {
-  ( cd ${ROOT}
-    rm -rf ${BUILD}/initramfs
-    rm -f ${STAMPS_INSTALL}/initramfs/install_target ${STAMPS_INSTALL}/*/install_init
-    ${SCRIPTS}/install initramfs
-  )
-
   # copy some extra firmware to linux tree (unused)
   # mkdir -p ${PKG_BUILD}/external-firmware
   # cp -a $(get_build_dir kernel-firmware)/rockchip ${PKG_BUILD}/external-firmware
@@ -176,11 +170,6 @@ make_target() {
     )
   fi
 
-  ( cd ${ROOT}
-    rm -rf ${BUILD}/initramfs
-    ${SCRIPTS}/install initramfs
-  )
-
   pkg_lock_status "ACTIVE" "linux:target" "build"
 
   # arm64 target does not support creating uImage.
@@ -210,9 +199,6 @@ make_target() {
     rm -f ${INSTALL}/$(get_kernel_overlay_dir)/lib/modules/*/build
     rm -f ${INSTALL}/$(get_kernel_overlay_dir)/lib/modules/*/source
 
-    rm -rf ${BUILD}/initramfs
-    rm -f ${STAMPS_INSTALL}/initramfs/install_target ${STAMPS_INSTALL}/*/install_init
-
     mkdir -p ${BUILD}/initramfs/etc
     mkdir -p ${BUILD}/initramfs/usr/lib/modules
 
@@ -224,11 +210,12 @@ make_target() {
       fi
     done
 
-    ( cd ${ROOT}
-      rm -rf ${BUILD}/initramfs
-      ${SCRIPTS}/install initramfs
-    )
   fi
+
+  (
+    cd ${ROOT}
+    ${SCRIPTS}/install initramfs
+  )
 
   # Build or rebuild the modules.
   kernel_make ${KERNEL_TARGET} ${KERNEL_MAKE_EXTRACMD} modules
