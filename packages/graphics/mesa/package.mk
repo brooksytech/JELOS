@@ -12,7 +12,7 @@ PKG_PATCH_DIRS+=" ${DEVICE}"
 case ${DEVICE} in
   #Panthor branch
   RK3588)
-	PKG_VERSION="36ac5af2cc09b6cc41fb5f68cb95af6e71a33def"
+	PKG_VERSION="158227390aeac63a5774812dd20a1fef57b81abc"
 	PKG_SITE="https://gitlab.freedesktop.org/bbrezillon/mesa"
 	PKG_URL="${PKG_SITE}.git"
 	PKG_GIT_CLONE_BRANCH="panfrost-v10"

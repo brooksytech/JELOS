@@ -74,7 +74,7 @@
     WINDOWMANAGER="weston"
   
   # kernel serial console
-    EXTRA_CMDLINE=""
+    EXTRA_CMDLINE="systemd.debug_shell=ttyS2 console=ttyS2,1500000"
 
   # additional packages to install
   #  ADDITIONAL_PACKAGES=""
