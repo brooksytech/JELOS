@@ -1,6 +1,6 @@
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boot/dts/rockchip/Makefile
 --- linux.orig/arch/arm64/boot/dts/rockchip/Makefile	2024-02-17 04:22:11.891040877 +0000
-+++ linux/arch/arm64/boot/dts/rockchip/Makefile	2024-02-18 05:07:34.930227896 +0000
++++ linux/arch/arm64/boot/dts/rockchip/Makefile	2024-02-19 04:55:15.942006979 +0000
 @@ -113,6 +113,7 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3588-ro
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3588-turing-rk1.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3588s-coolpi-4b.dtb
@@ -11,8 +11,8 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boo
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3588s-orangepi-5.dtb
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts linux/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts
 --- linux.orig/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts	1970-01-01 00:00:00.000000000 +0000
-+++ linux/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts	2024-02-18 05:29:39.850735671 +0000
-@@ -0,0 +1,743 @@
++++ linux/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts	2024-02-19 04:55:41.066894552 +0000
+@@ -0,0 +1,763 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +
 +/dts-v1/;
@@ -40,6 +40,26 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3588s-gameforce-ace.dts lin
 +	chosen {
 +		stdout-path = "serial2:1500000n8";
 +	};
++
++        adc-keys {
++                compatible = "adc-keys";
++                io-channels = <&saradc 1>;
++                io-channel-names = "buttons";
++                keyup-threshold-microvolt = <1800000>;
++                poll-interval = <100>;
++
++                button-vol-down {
++                        label = "Volume Down";
++                        linux,code = <KEY_VOLUMEDOWN>;
++                        press-threshold-microvolt = <17000>;
++                };
++
++                button-vol-up {
++                        label = "Volume Up";
++                        linux,code = <KEY_VOLUMEUP>;
++                        press-threshold-microvolt = <417000>;
++                };
++        };
 +
 +	gpio_leds: gpio-leds {
 +		compatible = "gpio-leds";

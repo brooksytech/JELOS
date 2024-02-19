@@ -74,7 +74,7 @@
     WINDOWMANAGER="weston"
   
   # kernel serial console
-    #EXTRA_CMDLINE=""
+    EXTRA_CMDLINE=""
 
   # additional packages to install
   #  ADDITIONAL_PACKAGES=""
@@ -82,7 +82,7 @@
   # additional Firmware to use ( )
   # Space separated list is supported,
   # e.g. FIRMWARE=""
-    FIRMWARE="libmali_rk3588 RTL8821CS-firmware ap6256-firmware"
+    FIRMWARE="g610-mali-firmware RTL8821CS-firmware"
 
   # additional drivers to install:
   # for a list of additional drivers see packages/linux-drivers
@@ -99,7 +99,7 @@
     DRIVER_ADDONS=""
 
   # debug tty path
-    DEBUG_TTY="/dev/ttyFIQ0"
+    DEBUG_TTY="/dev/ttyS2"
 
   # Disable 32BIT support
     ENABLE_32BIT="true"
