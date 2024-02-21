@@ -59,7 +59,8 @@
 
   # Mali GPU family
     MALI_FAMILY="g610"
-    GRAPHIC_DRIVERS="panfrost"
+    GRAPHIC_DRIVERS="panthor"
+#    GRAPHIC_DRIVERS="panfrost"
 
   # OpenGL(X) implementation to use (mesa / no)
     OPENGL="mesa"
@@ -82,7 +83,7 @@
   # additional Firmware to use ( )
   # Space separated list is supported,
   # e.g. FIRMWARE=""
-    FIRMWARE="g610-mali-firmware RTL8821CS-firmware"
+    FIRMWARE="g610-mali-firmware ap6256-firmware RTL8821CS-firmware"
 
   # additional drivers to install:
   # for a list of additional drivers see packages/linux-drivers

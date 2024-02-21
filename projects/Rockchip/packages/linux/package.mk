@@ -8,7 +8,7 @@ PKG_NAME="linux"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/JustEnoughLinuxOS"
 PKG_DEPENDS_HOST="ccache:host rdfind:host rsync:host openssl:host"
-PKG_DEPENDS_TARGET="toolchain rdfind:host linux:host cpio:host kmod:host xz:host lz4:host wireless-regdb keyutils util-linux binutils ncurses openssl:host ${KERNEL_EXTRA_DEPENDS_TARGET}"
+PKG_DEPENDS_TARGET="toolchain rdfind:host linux:host cpio:host kmod:host xz:host lz4:host keyutils util-linux binutils ncurses openssl:host ${KERNEL_EXTRA_DEPENDS_TARGET}"
 PKG_NEED_UNPACK="${LINUX_DEPENDS} $(get_pkg_directory initramfs) $(get_pkg_variable initramfs PKG_NEED_UNPACK)"
 PKG_LONGDESC="This package builds the kernel for Rockchip devices"
 PKG_IS_KERNEL_PKG="yes"
@@ -128,9 +128,9 @@ pre_make_target() {
   yes "" | kernel_make oldconfig
 
   # regdb (backward compatability with pre-4.15 kernels)
-  if grep -q ^CONFIG_CFG80211_INTERNAL_REGDB= ${PKG_BUILD}/.config ; then
-    cp $(get_build_dir wireless-regdb)/db.txt ${PKG_BUILD}/net/wireless/db.txt
-  fi
+#  if grep -q ^CONFIG_CFG80211_INTERNAL_REGDB= ${PKG_BUILD}/.config ; then
+#    cp $(get_build_dir wireless-regdb)/db.txt ${PKG_BUILD}/net/wireless/db.txt
+#  fi
   makeinstall_host
 }
 
@@ -284,7 +284,7 @@ post_install() {
   fi
 
   # regdb and signature is now loaded as firmware by 4.15+
-    if grep -q ^CONFIG_CFG80211_REQUIRE_SIGNED_REGDB= ${PKG_BUILD}/.config; then
-      cp $(get_build_dir wireless-regdb)/regulatory.db{,.p7s} ${INSTALL}/$(get_full_firmware_dir)
-    fi
+   # if grep -q ^CONFIG_CFG80211_REQUIRE_SIGNED_REGDB= ${PKG_BUILD}/.config; then
+   #   cp $(get_build_dir wireless-regdb)/regulatory.db{,.p7s} ${INSTALL}/$(get_full_firmware_dir)
+   # fi
 }

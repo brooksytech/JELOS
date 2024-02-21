@@ -1,0 +1,16 @@
+[Unit]
+Description=gameforce_chi_gamepad
+Before=weston.service
+Wants=weston.service
+
+[Service]
+Environment=HOME=/storage
+ExecStart=/usr/bin/gameforce-chi-gamepad
+KillMode=process
+TimeoutStopSec=3
+Restart=always
+RestartSec=2
+StartLimitInterval=0
+
+[Install]
+WantedBy=multi-user.target
